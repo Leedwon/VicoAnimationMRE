@@ -55,10 +55,14 @@ private fun VicoMre() {
     var minY by remember { mutableFloatStateOf(0f) }
     var maxY by remember { mutableFloatStateOf(0f) }
 
+    fun setData(data: List<List<SimpleChartEntry>>) {
+        minY = min(0f, data.flatten().minOf { it.y })
+        maxY = max(data.flatten().maxOf { it.y }, 0f)
+        chartEntryModelProducer.setEntries(data)
+    }
+
     LaunchedEffect(Unit) {
-        chartEntryModelProducer.setEntries(data[0])
-        minY = data[0].flatten().minOf { it.y }
-        maxY = data[0].flatten().maxOf { it.y }
+        setData(data[0])
     }
 
     Column(modifier = Modifier.padding(16.dp)) {
@@ -70,10 +74,7 @@ private fun VicoMre() {
         Button(
             onClick = {
                 clicks++
-                val data = data[clicks % 2]
-                minY = min(0f, data.flatten().minOf { it.y })
-                maxY = max(data.flatten().maxOf { it.y }, 0f)
-                chartEntryModelProducer.setEntries(data)
+                setData(data[clicks % 2])
             }
         ) {
             Text("Change values")
