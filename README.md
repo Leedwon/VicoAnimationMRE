@@ -1,1 +1,1 @@
-This repo provides MRE (minimal reproducible example) for [vico](https://github.com/patrykandpatrick/vico/issues/363) 
+This repo provides MRE (minimal reproducible example) for [vico animation issue](https://github.com/patrykandpatrick/vico/issues/363) 
